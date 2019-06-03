@@ -1,0 +1,15 @@
+.header {
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-left: 16px;
+  padding-right: 16px;
+  top: 0;
+}
+
+.header--no-top{
+  background: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,.5);
+}

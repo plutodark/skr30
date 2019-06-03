@@ -1,0 +1,12 @@
+.iframeMap {
+  max-width: 1000px;
+  max-height: 700px;
+  width: calc(100vw - 200px);
+  height: calc(100vw * 0.7);
+}
+@media only screen and (max-width: 480px) {
+  .iframeMap {
+    width: 90vw;
+    height: 90vw;
+  }
+}
