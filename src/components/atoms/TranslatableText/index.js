@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import qs from 'query-string';
 import { get, isEmpty } from 'lodash';

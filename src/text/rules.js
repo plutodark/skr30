@@ -100,7 +100,7 @@ const text = {
             <li><b>Black Rain Storm Warning</b> If still on or put up at 2 hours before the race start, the race will be cancelled.</li>
             <li><b>Red Rain Storm Warning</b> If still on or put up 15 minutes before race start, the decision to start will be made on course conditions and other prevailing weather factors (including the likelihood of changing to Black Rain Storm during the event).</li>
           </ul>
-          <Paragraph>For more information on the weather signals see here: [<a href='http://www.hko.gov.hk/wxinfo/climat/warndb/warndba_e.shtml' target='_blank'>Hong Kong Government Weather Website</a>]</Paragraph>
+          <Paragraph>For more information on the weather signals see here: [<a href='http://www.hko.gov.hk/wxinfo/climat/warndb/warndba_e.shtml' target='_blank' rel='noopener noreferrer'>Hong Kong Government Weather Website</a>]</Paragraph>
           <Paragraph>There will be no refund in the case of a race cancellation due to weather circumstances. We will do our best to reschedule the race.</Paragraph>
         </div>
         <div>

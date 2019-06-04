@@ -44,7 +44,7 @@ const menu = {
     tc: '交通',
     href: 'transport',
   },
-  volunteer: {
+  volunteers: {
     en: 'Volunteer',
     tc: '義工',
     href: 'volunteers',

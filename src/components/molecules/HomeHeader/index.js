@@ -21,15 +21,9 @@ const HomeHeader = (props) => {
       window.requestAnimationFrame(() => setIsTop(false));
     }
   };
-  const mount = () => {
-    window.addEventListener('scroll', handleScroll);
-  };
-  const unmount = () => {
-    window.removeEventListener('scroll', handleScroll);
-  };
   useEffect(() => {
-    mount();
-    return unmount;
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
   const renderMenuButton = () => {
     const text = () => {
