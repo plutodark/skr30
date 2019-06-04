@@ -1,8 +1,8 @@
 import React from 'react';
 import { isEmpty } from 'lodash';
 import { Nav } from 'react-bootstrap';
-import logoBlue from '../../../images/logoBlue.png';
-import logoWhite from '../../../images/logoWhite.png';
+import logoBlue from '../../../asset/images/logoBlue.png';
+import logoWhite from '../../../asset/images/logoWhite.png';
 import './style.scss';
 
 const Logo = (props) => {

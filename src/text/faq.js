@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'gatsby';
 import { Table } from 'react-bootstrap';
 import Paragraph from '../components/atoms/Paragraph';
 import Smalltitle from '../components/atoms/Smalltitle';
@@ -98,7 +97,7 @@ const text = {
         </div>
         <div>
           <Smalltitle>How to go/leave Pak Tam Chung P.H.A.B. Site?</Smalltitle>
-          <Paragraph>Please refer to: <Link to='/transport'>Transport Page</Link></Paragraph>
+          <Paragraph>Please refer to: <a href='/transport'>Transport Page</a></Paragraph>
         </div>
         <div>
           <Smalltitle>Will any bowl/cup/bottle/cutlery be provided in checkpoints?</Smalltitle>
@@ -204,7 +203,7 @@ const text = {
         </div>
         <div>
           <Smalltitle>怎樣前往/離開北潭涌傷健樂園？</Smalltitle>
-          <Paragraph>請參考<Link to='/transport?locale=tc'>交通</Link>。</Paragraph>
+          <Paragraph>請參考<a href='/transport?locale=tc'>交通</a>。</Paragraph>
         </div>
         <div>
           <Smalltitle>請問支援站會有餐具提供嗎？</Smalltitle>

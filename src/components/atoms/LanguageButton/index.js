@@ -3,10 +3,9 @@ import { withRouter } from 'react-router';
 import { ButtonGroup, Button } from 'react-bootstrap';
 import { assign } from 'lodash';
 import qs from 'query-string';
-import history from 'history';
 
 const LanguageButton = (props) => {
-  const { location } = props;
+  const { location, history } = props;
   const updateLanguage = (locale) => {
     const { pathname } = location;
     const parsed = qs.parse(location.search);

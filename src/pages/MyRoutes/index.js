@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router';
 import { map } from 'lodash';
-import Page from '../Page';
+import Content from '../../components/organisms/Content';
 import contents from '../../text/menu';
 
 const MyRoutesPage = (props) => {
@@ -11,7 +11,7 @@ const MyRoutesPage = (props) => {
       <Route
         key={index}
         path={path}
-        render={() => <Page index={index} />}
+        render={() => <Content index={index} />}
       />
     );
   });

@@ -1,7 +1,7 @@
 import React from 'react';
 import Paragraph from '../components/atoms/Paragraph';
 import ExternalLink from '../components/atoms/ExternalLink';
-import cam2Logo from '../images/cam2Logo.jpg';
+import cam2Logo from '../asset/images/cam2Logo.jpg';
 
 const text = {
   title: {

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
 // import HamburgerButton from '../../atoms/HamburgerButton';
+import withLocale from '../../hoc/withLocale';
 import Logo from '../../atoms/Logo';
 import './style.scss';
 
@@ -74,4 +75,4 @@ HomeHeader.propTypes = {
   locale: PropTypes.string,
 };
 
-export default HomeHeader;
+export default withLocale(HomeHeader);
