@@ -33,8 +33,8 @@ const Layout = (props) => {
   const isHome = location.pathname === '/';
   return (
     <div className='layout'>
-      {isHome && <img src={homeImg} alt='home' />}
-      <div className={`${isHome ? 'layout--homeContent' : ''}`}>
+      {isHome && <img className={'layout--cover-image'} src={homeImg} alt='home' />}
+      <div className={`${isHome ? 'layout--home-content' : ''}`}>
         <div className='layout--content'>
           {children}
         </div>

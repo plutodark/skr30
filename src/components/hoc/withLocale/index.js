@@ -6,7 +6,6 @@ const withLocale = (WrappedComponent) => {
   const localeDetector = (props) => {
     const { location } = props;
     const { locale = 'en' } = qs.parse(location.search);
-    console.log('locale', locale);
     const isHome = location.pathname === '/';
     return (
       <WrappedComponent

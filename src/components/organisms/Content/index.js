@@ -7,12 +7,14 @@ const Content = (props) => {
     locale,
     isHome,
     index,
+    location,
   } = props;
-  console.log('index', index);
-  const text = require(`../../../text/${index}`).default;
+  const { pathname } = location;
+  // redirect to 404 if not someone type wrong
+  const page = index === 'home' && pathname !== '/' ? '404' : index;
+  const text = require(`../../../text/${page}`).default;
   const title = text.title[locale];
   const content = text.content[locale];
-  console.log('text', text);
   return (
     <>
       <h1 className={`pageTitle ${isHome ? 'homeTitle' : ''}`}>{title}</h1>

@@ -12,19 +12,23 @@ const MenuModal = (props) => {
     isOpen,
     onClose,
     location,
+    history,
   } = props;
+  const goToLink = (href) => {
+    onClose();
+    history.push(href);
+  };
   const renderLinks = () => map(menu, (item, index) => {
     let { href } = item;
     if (!isEmpty(location)) {
-      href = `${href}${location.search}`;
+      href = `/${href}${location.search}`;
     }
     return (
       <ListGroup.Item
         action
         key={index}
-        href={href}
         className='menu-modal--link'
-        onClick={onClose}
+        onClick={() => goToLink(href)}
       >
         <TranslatableText dictionary={item} {...props} />
       </ListGroup.Item>

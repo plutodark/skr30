@@ -1,20 +1,24 @@
 import React from 'react';
-import { Route } from 'react-router';
-import { map } from 'lodash';
+import { Switch, Route } from 'react-router';
+import { reduceRight, concat } from 'lodash';
 import Content from '../../components/organisms/Content';
 import contents from '../../text/menu';
 
 const MyRoutesPage = (props) => {
-  return map(contents,(content, index) => {
-    const path = `/${content.href}`;
-    return (
-      <Route
-        key={index}
-        path={path}
-        render={() => <Content index={index} />}
-      />
-    );
-  });
-
+  return (
+    <Switch>
+      {reduceRight(contents,(result, content, index) => {
+        const path = `/${content.href}`;
+        const ele = (
+          <Route
+            key={index}
+            path={path}
+            render={() => <Content index={index} />}
+          />
+        );
+        return concat(result, ele);
+      }, [])}
+    </Switch>
+  );
 };
 export default MyRoutesPage;

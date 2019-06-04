@@ -7,7 +7,7 @@
   padding-left: 20px;
   padding-right: 20px;
 }
-.layout--homeContent {
+.layout--home-content {
     position: absolute;
     top: 0;
     left: 0;
@@ -16,15 +16,26 @@
     display: flex;
     align-items: center;
 }
-.layout--homeContent .layout--content {
+.layout--home-content .layout--content {
   padding-top: 0px;
 }
 
 .defaultFontColor {
   color: #008EAA;
 }
+.layout--cover-image {
+  max-width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 0;
+  padding-bottom: 0;
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 0;
+  margin-bottom: 1.45rem;
+}
 @media only screen and (max-width: 480px) {
-  .layout--homeContent  {
+  .layout--home-content  {
     position: relative;
     display: block;
   }
