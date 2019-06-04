@@ -1,7 +1,9 @@
-import 'core-js/es/map';
-import 'core-js/es/set';
-import 'core-js/es/string';
-import 'raf/polyfill';
+import 'react-app-polyfill/ie9';
+import 'react-app-polyfill/stable';
+// import 'core-js/es/map';
+// import 'core-js/es/set';
+// import 'core-js/es/string';
+// import 'raf/polyfill';
 import React from 'react';
 import { render } from 'react-snapshot';
 import  {
