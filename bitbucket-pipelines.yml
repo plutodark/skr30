@@ -18,3 +18,14 @@ pipelines:
             - pip install awscli --upgrade --ignore-installed six
             - aws s3 sync ./build s3://$S3_BUCKET_DEV --cache-control "no-store,no-cache,must-revalidate,post-check=0,pre-check=0,max-age=0" --acl public-read
             - aws s3 cp --cache-control max-age=0 ./build/service-worker.js s3://$S3_BUCKET_DEV/
+    prod:
+      - step:
+          caches:
+            - node
+          name: Build
+          script: # Modify the commands below to build your repository.
+            - npm install
+            - npm run build
+            - pip install awscli --upgrade --ignore-installed six
+            - aws s3 sync ./build s3://$S3_BUCKET_PROD --cache-control "no-store,no-cache,must-revalidate,post-check=0,pre-check=0,max-age=0" --acl public-read
+            - aws s3 cp --cache-control max-age=0 ./build/service-worker.js s3://$S3_BUCKET_PROD/

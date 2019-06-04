@@ -59,11 +59,11 @@ const menu = {
     tc: '比賽結果',
     href: 'result',
   },
-  acknowledgements: {
-    en: 'Acknowledgements',
-    tc: '鳴謝',
-    href: 'acknowledgements',
-  },
+  // acknowledgements: {
+  //   en: 'Acknowledgements',
+  //   tc: '鳴謝',
+  //   href: 'acknowledgements',
+  // },
   policy: {
     en: 'Policy',
     tc: '私隱政策',

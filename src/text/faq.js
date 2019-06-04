@@ -22,7 +22,7 @@ const text = {
         </div>
         <div>
           <Smalltitle>What is the race packs collection arrangement?</Smalltitle>
-          <Paragraph>Race packs collection will take place on the event day or around one to two weeks before the race at Cam2 Sport at 9/F., Yau Shing Comm. Centre, 51 Sai Yeung Choi Street, Mong Kok, Hong Kong. You may visit the website of <a href='https://cam2.com.hk/' target='_blank' rel='noopener noreferrer'>Cam2 Sport</a>.</Paragraph>
+          <Paragraph>Race packs collection will take place on the event day.</Paragraph>
           <Paragraph>Details will be announced later.</Paragraph>
         </div>
         <div>
@@ -129,7 +129,7 @@ const text = {
         </div>
         <div>
           <Smalltitle>如何領取選手包？</Smalltitle>
-          <Paragraph>選手包將於比賽日派發或在比賽前一至兩星期經Cam2 Sport派發。其地址：旺角西洋菜街51號友誠商業大廈9樓。可以去Cam2 Sport的<a href='https://cam2.com.hk/' target='_blank' rel='noopener noreferrer'>網頁</a>。</Paragraph>
+          <Paragraph>選手包將於比賽日派發。</Paragraph>
           <Paragraph>詳情容後發佈。</Paragraph>
         </div>
         <div>
