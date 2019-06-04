@@ -39,6 +39,7 @@ const HomeHeader = (props) => {
     return (
       <Button
         variant='info'
+        className={'header--menu-button'}
         onClick={() => handleEvent({ command: 'toggleMenu' })}
       >
         {text()}

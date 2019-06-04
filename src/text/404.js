@@ -23,7 +23,7 @@ const text = {
         <div>
           <Subtitle>不小心入了結界？</Subtitle>
           <Paragraph>行錯路點算？請跑手回主頁由頭開始</Paragraph>
-          <Paragraph><a href='/?locale-tc'>重新出發</a></Paragraph>
+          <Paragraph><a href='/?locale=tc'>重新出發</a></Paragraph>
         </div>
       </div>
     ),
