@@ -1,9 +1,13 @@
 import React from 'react';
+import Layout from '../Layout';
 import MyRoutes from '../MyRoutes';
+import '../../main.scss';
 
 const App = () => {
   return (
-    <MyRoutes />
+    <Layout>
+      <MyRoutes />
+    </Layout>
   );
 }
 export default App;

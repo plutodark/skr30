@@ -9,7 +9,7 @@ const menu = {
     tc: '線上報名',
     href: 'registration',
   },
-  raceDetails: {
+  summary: {
     en: 'Race Summary',
     tc: '比賽撮要',
     href: 'summary',
@@ -44,7 +44,7 @@ const menu = {
     tc: '交通',
     href: 'transport',
   },
-  volunteer: {
+  volunteers: {
     en: 'Volunteer',
     tc: '義工',
     href: 'volunteers',

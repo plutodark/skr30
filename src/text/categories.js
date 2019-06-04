@@ -1,5 +1,4 @@
 import React from 'react';
-import Subtitle from '../components/atoms/Subtitle';
 import Paragraph from '../components/atoms/Paragraph';
 
 const text = {

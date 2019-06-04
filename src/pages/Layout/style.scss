@@ -1,0 +1,31 @@
+.layout--content {
+  max-width: 1000px;
+  padding-top: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 100px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.layout--homeContent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+}
+.layout--homeContent .layout--content {
+  padding-top: 0px;
+}
+
+.defaultFontColor {
+  color: #008EAA;
+}
+@media only screen and (max-width: 480px) {
+  .layout--homeContent  {
+    position: relative;
+    display: block;
+  }
+}

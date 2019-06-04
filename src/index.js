@@ -1,9 +1,13 @@
+import 'core-js/es/map';
+import 'core-js/es/set';
+import 'core-js/es/string';
+import 'raf/polyfill';
 import React from 'react';
 import { render } from 'react-snapshot';
 import  {
   BrowserRouter as Router,
 } from 'react-router-dom';
-import './index.css';
+import './main.scss';
 import App from './pages/App';
 import * as serviceWorker from './serviceWorker';
 

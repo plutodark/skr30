@@ -19,9 +19,10 @@ const MenuModal = (props) => {
       href = `${href}${location.search}`;
     }
     return (
-      <ListGroup.Item action
+      <ListGroup.Item
+        action
         key={index}
-        to={href}
+        href={href}
         className='menu-modal--link'
         onClick={onClose}
       >
