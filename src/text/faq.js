@@ -86,7 +86,7 @@ const text = {
         </div>
         <div>
           <Smalltitle>Can I get any ITRA points participating in SKR30 for Ultra Trail du Mont Blanc® (UTMB) or Ultra Trail Mount Fuji (UTMF)?</Smalltitle>
-          <Paragraph>Yes, we have confirmed that finishers of SKR30 will get 2 ITRA points. Please refer to the websites of UTMB and ITRA.</Paragraph>
+          <Paragraph>Yes, we have confirmed that finishers of SKR30 will get 1 ITRA points. Please refer to the websites of UTMB and ITRA.</Paragraph>
           <Paragraph>Links of ITRA:</Paragraph>
           <Paragraph>Update later.</Paragraph>
           <Paragraph>Update later.</Paragraph>
@@ -193,7 +193,7 @@ const text = {
         </div>
         <div>
           <Smalltitle>請問「西貢30公里跑」可獲得多少ITRA分用來參加Ultra Trail Mont Blanc (UTMB) or Ultra Trail Mount Fuji (UTMF) ？</Smalltitle>
-          <Paragraph>完成可獲2 ITRA分。請參考UTMB及ITRA的網頁</Paragraph>
+          <Paragraph>完成可獲1 ITRA分。請參考UTMB及ITRA的網頁</Paragraph>
           <Paragraph>Update later.</Paragraph>
           <Paragraph>Update later.</Paragraph>
         </div>
