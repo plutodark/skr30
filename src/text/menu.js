@@ -59,6 +59,11 @@ const menu = {
     tc: '比賽結果',
     href: 'result',
   },
+  photos: {
+    en: 'Photos',
+    tc: '相片',
+    href: 'photos',
+  },
   // acknowledgements: {
   //   en: 'Acknowledgements',
   //   tc: '鳴謝',

@@ -6,17 +6,21 @@ import 'react-app-polyfill/stable';
 // import 'raf/polyfill';
 import React from 'react';
 import { render } from 'react-snapshot';
+import { Provider } from 'react-redux';
 import  {
   BrowserRouter as Router,
 } from 'react-router-dom';
+import store from './store';
 import './main.scss';
 import App from './pages/App';
 import * as serviceWorker from './serviceWorker';
 
 const renderedApp = (
-  <Router>
-    <App />
-  </Router>
+  <Provider store={store}>
+    <Router>
+      <App />
+    </Router>
+  </Provider>
 );
 const rootElement = document.getElementById('app');
 render(renderedApp, rootElement);

@@ -8,15 +8,27 @@ const IconButton = (props) => {
     icon,
     onClick,
     className,
+    label,
   } = props;
+  const renderIcon = () => (
+    <div
+      className={'icon-button--icon'}
+    >
+      <MaterialIcon
+        icon={icon}
+      />
+    </div>
+  );
+  const renderLabel = () => (
+    <div className={'icon-button--label'}>{label}</div>
+  );
   return (
     <div
       className={`icon-button ${className}`}
       onClick={onClick}
     >
-      <MaterialIcon
-        icon={icon}
-      />
+      {label && renderLabel()}
+      {renderIcon()}
     </div>
   );
 };
@@ -25,12 +37,14 @@ IconButton.defaultProps = {
   className: '',
   icon: 'close',
   onClick: () => {},
+  label: '',
 };
 
 IconButton.propTypes = {
   className: PropTypes.string,
   icon: PropTypes.string,
   onClick: PropTypes.func,
+  label: PropTypes.string,
 };
 
 

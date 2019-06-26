@@ -1,0 +1,11 @@
+.photos--photos {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.photos--more-button {
+  flex-direction: column-reverse;
+  .icon-button--label {
+    margin-left: 10px;
+  }
+}

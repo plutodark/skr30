@@ -24,10 +24,10 @@ const IconMenu = (props) => {
     const { label, onClick, icon } = command;
     return (
       <div className={'icon-menu--menu--button'} key={key}>
-        <div className={'icon-menu--menu--button--label'}>{label}</div>
         <IconButton
           icon={icon}
           className={'icon-menu--menu--button--icon'}
+          label={label}
           onClick={onClick}
         />
       </div>
