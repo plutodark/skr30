@@ -2,7 +2,6 @@ import {
   assign,
   get,
   chain,
-  isNull
   // concat,
   // value,
   // uniqBy,
@@ -29,20 +28,22 @@ const posts = (state = initialState, action) => {
       const oldItems = get(state, 'items', []);
       const newItems = chain(items)
         .concat(oldItems)
-        .uniqBy('id')
         .compact()
+        .uniqBy('id')
+        .sortBy(o => parseInt(o.created, 10))
+        .reverse()
         .value();
       const object = {
         isFetching: false,
         didInvalidate: false,
         items: newItems,
         lastUpdated,
-        page,
+        page: parseInt(page, 10),
         hasPrevPage,
         hasNextPage,
-        limit,
-        totalDocs,
-        totalPages,
+        limit: parseInt(limit, 10),
+        totalDocs: parseInt(totalDocs, 10),
+        totalPages: parseInt(totalPages, 10),
       };
       return assign({}, state, object);
     }

@@ -13,6 +13,8 @@ const Photos = (props) => {
     photos,
     dictionary,
     fetchPhotos,
+    hasNextPage,
+    page,
   } = props;
   const [isPhotoModalOpen, setPhotoModalOpen] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
@@ -50,7 +52,7 @@ const Photos = (props) => {
       <IconButton
       className={'photos--more-button'}
         icon={'keyboard_arrow_down'}
-        onClick={() => {}}
+        onClick={() => fetchPhotos(page + 1)}
         label={'more'}
       />
     );
@@ -59,7 +61,7 @@ const Photos = (props) => {
     <div>
       {photos ? renderPhotos() : renderEmptyPhotos()}
       {renderPhotoModal()}
-      {renderMoreButton()}
+      {hasNextPage && renderMoreButton()}
     </div>
   );
 };
@@ -67,8 +69,12 @@ const Photos = (props) => {
 const mapStateToProps = (state) => {
   const { PHOTOS } = state.Entities;
   const photos = get(PHOTOS, 'items', []);
+  const hasNextPage = get(PHOTOS, 'hasNextPage', false);
+  const page = get(PHOTOS, 'page', 0);
   return {
     photos,
+    hasNextPage,
+    page,
   };
 };
 const mapDispatchToProps = () => {

@@ -1,5 +1,6 @@
 import { gql } from 'apollo-boost';
 import actions from '../actions';
+import { get } from 'lodash';
 import { client } from '../../gql';
 
 const subreddit = 'PHOTOS';
@@ -31,8 +32,8 @@ const query = gql`
     }
   }
 `;
-const fetchPhotos = () => {
-  const fetchFunc = () => client.query({ query, variables: { limit: 10, page: 1 } }).then((response) => {
+const fetchPhotos = (page = 1) => {
+  const fetchFunc = () => client.query({ query, variables: { limit: 2, page: page } }).then((response) => {
     return response.data.getPhotos;
   });
   return actions.fetchPostsIfNeeded(subreddit, fetchFunc);
