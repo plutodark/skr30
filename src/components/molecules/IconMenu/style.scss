@@ -1,0 +1,15 @@
+.icon-menu {
+  position: relative;
+  display: inline-block;
+}
+.icon-menu--menu {
+  position: absolute;
+  top: 48px;
+  right: 0px;
+}
+.icon-menu--menu--button {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 10px;
+}

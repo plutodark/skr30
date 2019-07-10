@@ -1,0 +1,31 @@
+@import '../../../shared.scss';
+
+.icon-button {
+  display: flex;
+  align-items: center;
+  &:hover {
+    cursor: pointer;
+    .icon-button--icon {
+      border-color: $skr30-blue;
+      i {
+        color: $skr30-blue;
+      }
+    }
+    .icon-button--label {
+      color: $skr30-blue;
+    }
+
+  }
+  .icon-button--label {
+    margin-right: 10px;
+  }
+  .icon-button--icon {
+    border-radius: 50%;
+    display: flex;
+    height: 36px;
+    width:36px;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid grey;
+  }
+}
