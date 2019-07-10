@@ -1,6 +1,5 @@
 import { gql } from 'apollo-boost';
 import actions from '../actions';
-import { get } from 'lodash';
 import { client } from '../../gql';
 
 const subreddit = 'PHOTOS';
