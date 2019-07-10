@@ -32,7 +32,7 @@ const query = gql`
   }
 `;
 const fetchPhotos = (page = 1) => {
-  const fetchFunc = () => client.query({ query, variables: { limit: 2, page: page } }).then((response) => {
+  const fetchFunc = () => client.query({ query, variables: { limit: 8, page } }).then((response) => {
     return response.data.getPhotos;
   });
   return actions.fetchPostsIfNeeded(subreddit, fetchFunc);
