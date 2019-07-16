@@ -10,10 +10,7 @@ const IconMenu = (props) => {
     commands,
   } = props;
   const [isOpen, setIsOpen] = useState(false);
-  const onOpenClick = () => {
-    console.log('I am here');
-    setIsOpen(!isOpen);
-  };
+  const onOpenClick = () => setIsOpen(!isOpen);
   const renderMainButton = () => (
     <IconButton
       icon={isOpen ? 'expand_less' : 'more_vert'}
@@ -38,9 +35,13 @@ const IconMenu = (props) => {
       {map(commands, renderMenuButton)}
     </div>
   );
+  const renderOverlay = () => (
+    <div className={'icon-menu--overlay'} onClick={onOpenClick} />
+  );
   return (
     <div className={`icon-menu ${className}`} style={style}>
       {renderMainButton()}
+      {isOpen && renderOverlay()}
       {isOpen && renderMenuButtons()}
     </div>
   );

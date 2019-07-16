@@ -1,0 +1,53 @@
+.input--container {
+  border: grey 1px solid;
+  border-radius: 10px;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  flex-wrap: wrap;
+  cursor: text;
+  &:focus-within {
+    border-color: blue;
+  }
+}
+
+.input--tag {
+  margin-right: 10px;
+}
+.input--input {
+  border: none;
+  min-width: 280px;
+  margin: 5px;
+  &:active {
+    border: none;
+    .input {
+      border-color: blue;
+    }
+  }
+  &:focus {
+    border: none;
+    outline: none;
+  }
+  font-size: large;
+}
+.input--suggestions-container {
+  padding: 10px;
+  border: grey 1px solid;
+}
+.input--suggestions--item {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  &:hover {
+    background: #aaa;
+  }
+}
+.input--suggestions--item--selected {
+  background: #ccc;
+}
+.input--suggextions--empty-icon {
+  width: 24px;
+  height: 24px;
+}

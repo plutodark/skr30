@@ -1,4 +1,5 @@
 import {
+  UPDATE_ITEM_VALUE,
   REQUEST_POSTS,
   RECEIVE_POSTS,
   INVALIDATE_SUBREDDIT,
@@ -16,6 +17,13 @@ const receivePosts = ({ subreddit, data }) => dispatch({
   subreddit,
   data,
   lastUpdated: new Date(),
+});
+
+const updateItemValue = ({ subreddit, id, key, value }) => dispatch({
+  type: UPDATE_ITEM_VALUE,
+  id,
+  key,
+  value,
 });
 const invalidateSubreddit = (subreddit) => dispatch({
   type: INVALIDATE_SUBREDDIT,
@@ -46,4 +54,5 @@ export default {
   receivePosts,
   invalidateSubreddit,
   fetchPostsIfNeeded,
+  updateItemValue,
 };

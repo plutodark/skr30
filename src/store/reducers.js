@@ -2,6 +2,8 @@ import {
   assign,
   get,
   chain,
+  cloneDeep,
+  find,
   // concat,
   // value,
   // uniqBy,
@@ -10,6 +12,7 @@ import {
   INVALIDATE_SUBREDDIT,
   RECEIVE_POSTS,
   REQUEST_POSTS,
+  UPDATE_ITEM_VALUE,
 } from './actionTypes';
 import initialState from './initialState';
 
@@ -47,6 +50,15 @@ const posts = (state = initialState, action) => {
       };
       return assign({}, state, object);
     }
+    case UPDATE_ITEM_VALUE: {
+      const { id, key, value } = action;
+      const obj = {};
+      obj[key] = value;
+      const items = cloneDeep(get(state, 'items', []));
+      const item = find(items, { id })
+      assign(item, obj);
+      return assign({}, state, { items });
+    }
     default:
       return state;
   }
@@ -57,6 +69,7 @@ const postsBySubreddit = (state = {}, action) => {
     case INVALIDATE_SUBREDDIT:
     case RECEIVE_POSTS:
     case REQUEST_POSTS:
+    case UPDATE_ITEM_VALUE:
       return assign({}, state, { [subreddit]: posts(state[subreddit], action) });
     default:
       return state;

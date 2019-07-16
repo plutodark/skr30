@@ -1,0 +1,25 @@
+@import '../../../shared.scss';
+.tag {
+  display: flex;
+  background: $skr30-blue;
+  align-items: center;
+  justify-content: space-between;
+  width: min-content;
+  cursor: pointer;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+.tag--label {
+  margin-right: 10px;
+}
+.tag--icon {
+  margin-right: 5px;
+}
+.tag--close-button {
+  color: white;
+  &:hover {
+    color: grey;
+  }
+
+}

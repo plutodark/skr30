@@ -1,5 +1,5 @@
 import React from 'react';
-import Photos from '../components/organisms/Photos';
+import Photos from '../pages/Photos';
 
 const text = {
   title: {

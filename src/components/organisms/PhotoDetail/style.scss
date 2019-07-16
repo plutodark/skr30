@@ -1,0 +1,22 @@
+
+.photo-detail--top-bar {
+  display: flex;
+  justify-content: space-between;
+  .icon-menu--menu {
+    background: white;
+    padding: 5px;
+  }
+
+}
+.photo-detail--image-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin: auto;
+  .photo-detail--image {
+    margin-top: 10px;
+    object-fit: contain;
+    max-width: 80vw;
+    max-height: 80vh;
+  }
+}
