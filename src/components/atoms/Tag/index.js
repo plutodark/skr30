@@ -1,4 +1,5 @@
 import React from 'react';
+import MaterialIcon from 'material-icons-react';
 import './style.scss';
 
 const Tag = (props) => {
@@ -10,7 +11,7 @@ const Tag = (props) => {
     style,
   } = props;
   const renderIcon = () => (
-    <i className={'material-icons md-16 tag--icon'}>{icon}</i>
+    <MaterialIcon className={'material-icons md-16 tag--icon'} icon={icon} />
   );
   const renderLabel = () => (
     <div className={'tag--label'}>
@@ -18,12 +19,11 @@ const Tag = (props) => {
     </div>
   );
   const renderCloseButton = () => (
-    <i
+    <MaterialIcon
       onClick={() => handleEvent({ command: 'close' })}
       className={'material-icons md-16 tag--close-button'}
-    >
-      {'close'}
-    </i>
+      icon={'close'}
+    />
   );
   return (
     <div

@@ -1,4 +1,5 @@
 .input--container {
+  position: relative;
   border: grey 1px solid;
   border-radius: 10px;
   min-height: 40px;
@@ -35,6 +36,7 @@
 .input--suggestions-container {
   padding: 10px;
   border: grey 1px solid;
+  position: relative;
 }
 .input--suggestions--item {
   display: flex;
@@ -47,7 +49,14 @@
 .input--suggestions--item--selected {
   background: #ccc;
 }
-.input--suggextions--empty-icon {
+.input--suggestions--empty-icon {
   width: 24px;
   height: 24px;
+}
+.input--overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }

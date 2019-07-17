@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
+import MaterialIcon from 'material-icons-react';
 import { map, clamp, trim } from 'lodash';
 import Tag from '../Tag';
 import useDebounce from '../useDebounce';
@@ -6,15 +7,16 @@ import './style.scss';
 
 const Input = (props) => {
   const {
-    value,
+    inputValue,
     placeholder,
     tags,
     handleEvent,
     suggestions,
     isAutoComplete,
   } = props;
-  const [keyword, setKeyword] = useState(value);
-  const [suggestionIndex, setSuggestionIndex] = useState(0);
+  const [keyword, setKeyword] = useState(inputValue);
+  const [suggestionIndex, setSuggestionIndex] = useState(-1);
+  const [isFocus, setIsFocus] = useState(false);
   const inputEl = useRef(null);
   const onInputFocus = () => {
     inputEl.current.focus();
@@ -24,7 +26,7 @@ const Input = (props) => {
   useEffect(() => {
     if (debouncedSearchTerm && isAutoComplete) {
       console.log(debouncedSearchTerm);
-      handleEvent({ command: 'autoComplete', });
+      handleEvent({ command: 'autoComplete', value: debouncedSearchTerm });
     }
   }, [debouncedSearchTerm, handleEvent, isAutoComplete]);
   // debounce searh end
@@ -35,21 +37,21 @@ const Input = (props) => {
   const onEnter = (value) => {
     const trimmedValue = trim(value);
     handleEvent({ command: 'enter', value: trimmedValue });
-    setSuggestionIndex(0);
+    setSuggestionIndex(-1);
     setKeyword('');
   };
   const onChooseSuggestion = (num) => {
-    const result = clamp(suggestionIndex + num, 0, suggestions.length -1);
-    console.log('result', result);
-    if (suggestionIndex === result) {
-      return;
+    if (suggestions) {
+      const result = clamp(suggestionIndex + num, 0, suggestions.length -1);
+      if (suggestionIndex === result) {
+        return;
+      }
+      setKeyword(suggestions[result].label);
+      return setSuggestionIndex(result);
     }
-    setKeyword(suggestions[result].label);
-    return setSuggestionIndex(result);
   };
   const onKeyUp = (event) => {
     const { keyCode } = event;
-    console.log(keyCode);
     switch (keyCode) {
       // Enter
       case 13: {
@@ -88,6 +90,7 @@ const Input = (props) => {
       placeholder={placeholder}
       onKeyUp={onKeyUp}
       onChange={onChange}
+      onFocus={() => setIsFocus(true)}
     />
   );
 
@@ -114,7 +117,7 @@ const Input = (props) => {
         key={key}
         onClick={() => onEnter(label)}
       >
-        {icon ? <i className={'material-icons'}>{icon}</i> : <div className={'input--suggextions--empty-icon'} />}
+        {icon ? <MaterialIcon icon={icon} /> : <div className={'input--suggestions--empty-icon'} />}
         <div>{label}</div>
       </div>
     );
@@ -126,8 +129,12 @@ const Input = (props) => {
       </div>
     );
   };
+  const renderSuggestionOverlay = () => (
+    <div className={'input--overlay'} onClick={() => setIsFocus(false)} />
+  );
   return (
     <div className={'input'}>
+      {isFocus && renderSuggestionOverlay()}
       <div
         className={'input--container'}
         onClick={onInputFocus}
@@ -135,7 +142,7 @@ const Input = (props) => {
         {renderTags()}
         {renderInputBox()}
       </div>
-      {renderSuggestions()}
+      {isFocus && keyword && suggestions && renderSuggestions()}
     </div>
   );
 };
