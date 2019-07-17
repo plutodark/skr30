@@ -9,6 +9,7 @@ const Tag = (props) => {
     handleEvent,
     className,
     style,
+    isCloseButtonShown,
   } = props;
   const renderIcon = () => (
     <MaterialIcon className={'material-icons md-16 tag--icon'} icon={icon} />
@@ -33,9 +34,12 @@ const Tag = (props) => {
     >
       {icon && renderIcon()}
       {renderLabel()}
-      {renderCloseButton()}
+      {isCloseButtonShown && renderCloseButton()}
     </div>
   );
+};
+Tag.defaultProps = {
+  isCloseButtonShown: true,
 };
 
 export default Tag;

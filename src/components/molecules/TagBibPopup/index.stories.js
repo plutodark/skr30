@@ -1,16 +1,14 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
+import TagBibPopup from './';
 
-import TagPlacePopup from './';
-
-storiesOf('TagPlacePopup', module)
+storiesOf('TagBibPopup', module)
   .add('default', () => (
-    <TagPlacePopup
+    <TagBibPopup
       isOpen
       onClose={() => action('close')}
-      places={['Tai Tam', 'meow meow']}
-      handleEvent={action}
-      selectedPlace={'Tai Tam'}
+      bibs={['B0001', '1231']}
+      handleEvent={console.log}
     />
   ));
