@@ -11,8 +11,10 @@ import {
 import {
   INVALIDATE_SUBREDDIT,
   RECEIVE_POSTS,
+  RECEIVE_ITEM,
   REQUEST_POSTS,
   UPDATE_ITEM_VALUE,
+  SELECT_ITEM,
 } from './actionTypes';
 import initialState from './initialState';
 
@@ -50,6 +52,17 @@ const posts = (state = initialState, action) => {
       };
       return assign({}, state, object);
     }
+    case RECEIVE_ITEM: {
+      const oldItems = get(state, 'items', []);
+      const newItems = chain(oldItems)
+        .concat(data)
+        .compact()
+        .uniqBy('id')
+        .sortBy(o => parseInt(o.created, 10))
+        .reverse()
+        .value();
+        return assign({}, state, { items: newItems });
+    }
     case UPDATE_ITEM_VALUE: {
       const { id, key, value } = action;
       const obj = {};
@@ -58,6 +71,10 @@ const posts = (state = initialState, action) => {
       const item = find(items, { id })
       assign(item, obj);
       return assign({}, state, { items });
+    }
+    case SELECT_ITEM: {
+      const { id: selectedId } = action;
+      return assign({}, state, { selectedId });
     }
     default:
       return state;
@@ -69,6 +86,7 @@ const postsBySubreddit = (state = {}, action) => {
     case INVALIDATE_SUBREDDIT:
     case RECEIVE_POSTS:
     case REQUEST_POSTS:
+    case RECEIVE_ITEM:
     case UPDATE_ITEM_VALUE:
       return assign({}, state, { [subreddit]: posts(state[subreddit], action) });
     default:

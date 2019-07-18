@@ -1,5 +1,5 @@
 import React from 'react';
-import { map } from 'lodash';
+import { map, assign } from 'lodash';
 import { Modal } from 'react-bootstrap';
 import Input from '../../atoms/Input';
 import './style.scss';
@@ -10,12 +10,30 @@ const TagBibPopup = (props) => {
     onClose,
     bibs,
     handleEvent,
+    id,
   } = props;
   const tags = map(bibs,  o => ({ label: o, icon: 'looks_one' }));
+  const handleInputEvent = (props) => {
+    const { command } = props;
+    let newCommand;
+    switch (command) {
+      case 'enter':
+        newCommand = 'addBib';
+        break;
+      case 'removeTag':
+        newCommand = 'removeBib';
+        break;
+      default:
+        newCommand = command;
+        break;
+    }
+    const newProps = assign({}, props, { command: newCommand, id });
+    return handleEvent(newProps);
+  };
   const renderInput = () => (
     <Input
       tags={tags}
-      handleEvent={handleEvent}
+      handleEvent={handleInputEvent}
       placeholder={'Input the bib number here'}
     />
   );

@@ -31,8 +31,8 @@ const Input = (props) => {
   }, [debouncedSearchTerm, handleEvent, isAutoComplete]);
   // debounce searh end
   const onChange = (event) => {
-    const keyword = event.target.value;
-    setKeyword(keyword);
+    const value = event.target.value;
+    setKeyword(value);
   };
   const onEnter = (value) => {
     const trimmedValue = trim(value);
@@ -146,5 +146,7 @@ const Input = (props) => {
     </div>
   );
 };
-
+Input.defaultProps = {
+  inputValue: '',
+};
 export default Input;

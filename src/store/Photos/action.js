@@ -32,8 +32,27 @@ const getPhotoQuery = gql`
   }
 `;
 
+const getOnePhotoQuery = gql`
+  query getOnePhoto($id: String!){
+    getOnePhoto (id: $id) {
+      id
+      thumbnail
+      watermark
+      original
+      owner
+      downloadedCount
+      sharedFBCount
+      sharedInstagramCount
+      created
+      modified
+      fileKey
+      place
+      bib
+    }
+  }
+`;
 const addPlaceQuery = gql`
-  mutation addPlace ($id: String, $place: String) {
+  mutation addPlace ($id: String!, $place: String!) {
     addPlace (id: $id, place: $place) {
       success
       item {
@@ -45,7 +64,7 @@ const addPlaceQuery = gql`
 `;
 
 const removePlaceQuery = gql`
-  mutation removePlace ($id: String) {
+  mutation removePlace ($id: String!) {
     removePlace (id: $id) {
       success
       item {
@@ -57,8 +76,8 @@ const removePlaceQuery = gql`
 `;
 
 const addBibQuery = gql`
-  mutation addBib ($id: String, $bibNumber: String) {
-    addBib (id: $id) {
+  mutation addBib ($id: String!, $bibNumber: String!) {
+    addBib (id: $id, bibNumber: $bibNumber) {
       success
       item {
         id
@@ -69,8 +88,8 @@ const addBibQuery = gql`
 `;
 
 const removeBibQuery = gql`
-  mutation removeBib ($id: String, $bibNumber: String) {
-    removeBib (id: $id) {
+  mutation removeBib ($id: String!, $bibNumber: String!) {
+    removeBib (id: $id, bibNumber: $bibNumber) {
       success
       item {
         id
@@ -85,36 +104,45 @@ const fetchPhotos = (page = 1) => {
   });
   return actions.fetchPostsIfNeeded(subreddit, fetchFunc);
 };
+const fetchOnePhoto = (id) => {
+  const fetchFunc = () => client.query({ query: getOnePhotoQuery, variables: { id }}).then(response => (response.data.getOnePhoto));
+  return actions.fetchItemIfNeeded({ subreddit, id, fetchFunc });
+};
 
 const addPlace = (id, place) => {
-  const fetchFunc = () => client.query({ query: addPlaceQuery, variables: { id, place }}).then(response => {
+  const fetchFunc = () => client.mutate({ mutation: addPlaceQuery, variables: { id, place }}).then(response => {
     return response.data.addPlace.item.place;
   });
   fetchFunc().then((value) => actions.updateItemValue({ subreddit, id, key: 'place', value }));
 };
 const removePlace = (id) => {
-  const fetchFunc = () => client.query({ query: removePlaceQuery, variables: { id }}).then(response => {
-    return response.data.addPlace.item.place;
+  const fetchFunc = () => client.mutate({ mutation: removePlaceQuery, variables: { id }}).then(response => {
+    return response.data.removePlace.item.place;
   });
   fetchFunc().then((value) => actions.updateItemValue({ subreddit, id, key: 'place', value }));
 };
 
 const addBib = (id, bibNumber) => {
-  const fetchFunc = () => client.query({ query: addBibQuery, variables: { id, bibNumber }}).then(response => {
-    return response.data.addPlace.item.bib;
+  const fetchFunc = () => client.mutate({ mutation: addBibQuery, variables: { id, bibNumber }}).then(response => {
+    return response.data.addBib.item.bib;
   });
   fetchFunc().then((value) => actions.updateItemValue({ subreddit, id, key: 'bib', value }));
 };
 const removeBib = (id, bibNumber) => {
-  const fetchFunc = () => client.query({ query: removeBibQuery, variables: { id, bibNumber }}).then(response => {
-    return response.data.addPlace.item.place;
+  const fetchFunc = () => client.mutate({ mutation: removeBibQuery, variables: { id, bibNumber }}).then(response => {
+    return response.data.removeBib.item.bib;
   });
   fetchFunc().then((value) => actions.updateItemValue({ subreddit, id, key: 'bib', value }));
 };
+
+// const selectItem = (id) => actions.selectItem({ subreddit, id });
+
 export default {
   fetchPhotos,
+  fetchOnePhoto,
   addPlace,
   removePlace,
   addBib,
   removeBib,
+  // selectItem,
 };

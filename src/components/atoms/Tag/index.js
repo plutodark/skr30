@@ -40,6 +40,7 @@ const Tag = (props) => {
 };
 Tag.defaultProps = {
   isCloseButtonShown: true,
+  className: '',
 };
 
 export default Tag;

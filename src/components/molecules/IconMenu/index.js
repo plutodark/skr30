@@ -19,13 +19,17 @@ const IconMenu = (props) => {
   );
   const renderMenuButton = (command, key) => {
     const { label, onClick, icon } = command;
+    const handleClick = () => {
+      setIsOpen(false);
+      return onClick();
+    };
     return (
       <div className={'icon-menu--menu--button'} key={key}>
         <IconButton
           icon={icon}
           className={'icon-menu--menu--button--icon'}
           label={label}
-          onClick={onClick}
+          onClick={handleClick}
         />
       </div>
     );

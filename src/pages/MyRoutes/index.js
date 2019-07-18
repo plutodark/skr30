@@ -7,6 +7,10 @@ import contents from '../../text/menu';
 const MyRoutesPage = (props) => {
   return (
     <Switch>
+      <Route
+        path={'/photoDetail/:id?'}
+        render={() => <Content index={'photoDetail'} />}
+      />
       {reduceRight(contents,(result, content, index) => {
         const path = `/${content.href}`;
         const ele = (

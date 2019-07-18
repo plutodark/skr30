@@ -1,34 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { get } from 'lodash';
 import { connect } from 'react-redux';
 import action from '../../store/Photos/action';
 import withLocale from '../../components/hoc/withLocale';
 import Photos from '../../components/organisms/Photos';
-import PhotoDetail from '../../components/organisms/PhotoDetail';
+
 
 //const photos = ['https://champsys-blueprint-assets.s3-ap-southeast-1.amazonaws.com/1553479451813-SKR30+Logo+black.png', 'https://champsys-blueprint-assets.s3-ap-southeast-1.amazonaws.com/1553479451813-SKR30+Logo+black.png'];
 const PhotosPage = (props) => {
   const {
     fetchPhotos,
     photos,
+    history,
   } = props;
-  const [isPhotoOpen, setPhotoOpen] = useState(false);
-  const [photoIndex, setPhotoIndex] = useState(0);
   const onPhotoOpen = (index) => {
-    setPhotoIndex(index);
-    setPhotoOpen(true);
+    const { id } = photos[index];
+    const link = `/photoDetail/${id}`;
+    history.push(link);
   };
   useEffect(() => {
     fetchPhotos();
   }, [fetchPhotos]);
 
-  return isPhotoOpen ? (
-    <PhotoDetail
-      {...props}
-      photo={photos[photoIndex]}
-      setPhotoOpen={setPhotoOpen}
-    />
-  ) : (
+  return (
     <Photos
       {...props}
       onPhotoOpen={onPhotoOpen}
@@ -48,7 +42,9 @@ const mapStateToProps = (state) => {
   };
 };
 const mapDispatchToProps = () => {
-  const { fetchPhotos } = action;
+  const {
+    fetchPhotos,
+  } = action;
   return {
     fetchPhotos,
   };

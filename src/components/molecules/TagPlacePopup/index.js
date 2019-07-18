@@ -12,8 +12,13 @@ const TagPlacePopup = (props) => {
     handleEvent,
     id,
   } = props;
-  const renderItem = (place, item) => (
-    <Dropdown.Item onClick={() => handleEvent({ command: 'select', value: place, id })}>{place}</Dropdown.Item>
+  const renderItem = (place, key) => (
+    <Dropdown.Item
+      key={key}
+      onClick={() => handleEvent({ command: 'selectPlace', value: place, id })}
+    >
+      {place}
+    </Dropdown.Item>
   );
   const renderItems = () => map(places, renderItem);
   const renderDropdown = () => (

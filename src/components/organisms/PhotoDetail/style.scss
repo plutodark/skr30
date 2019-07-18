@@ -20,3 +20,12 @@
     max-height: 80vh;
   }
 }
+
+.photo-detail--tags {
+  display: flex;
+  margin-top: 10px;
+  flex-wrap: wrap;
+  .tag {
+    margin-right: 10px;
+  }
+}
