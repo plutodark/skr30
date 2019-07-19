@@ -21,10 +21,14 @@ const PhotosPage = (props) => {
   useEffect(() => {
     fetchPhotos();
   }, [fetchPhotos]);
-
+  const handleEvent = ({ command, value }) => {
+    console.log('command', command);
+    console.log('value', value);
+  };
   return (
     <Photos
       {...props}
+      handleEvent={handleEvent}
       onPhotoOpen={onPhotoOpen}
     />
   );
