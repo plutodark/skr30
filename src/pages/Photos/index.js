@@ -39,28 +39,29 @@ const PhotosPage = (props) => {
     history.push(link);
   };
 
-  const onSearchPhotos = () => {
-    const [placesInTag, bibObjs] =  partition(tags, { icon: 'place' });
-    const place = placesInTag.length > 0 ? chain(places)
-      .find(o => o.en === placesInTag[0].label || o.tc === placesInTag[0].label)
-      .get('id', '')
-      .value() : '';
-    const bibs = map(bibObjs, o => o.label);
-    searchPhotos({ place, bibs });
-  };
+
 
   useEffect(() => {
     fetchPhotos();
-  }, []);
+  }, [fetchPhotos]);
 
   useEffect(() => {
+    const onSearchPhotos = () => {
+      const [placesInTag, bibObjs] =  partition(tags, { icon: 'place' });
+      const place = placesInTag.length > 0 ? chain(places)
+        .find(o => o.en === placesInTag[0].label || o.tc === placesInTag[0].label)
+        .get('id', '')
+        .value() : '';
+      const bibs = map(bibObjs, o => o.label);
+      searchPhotos({ place, bibs });
+    };
     invalidateSearchPhotos();
     if (tags.length !== 0) {
       onSearchPhotos();
     }
     // searchPhotos();
     // invalidateSearchPhotos,
-  }, [tags]);
+  }, [tags, invalidateSearchPhotos, places,searchPhotos]);
   const handleEvent = ({ command, value }) => {
     console.log('command', command);
     console.log('value', value);

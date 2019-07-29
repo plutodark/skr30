@@ -28,7 +28,7 @@ const Input = (props) => {
       console.log('autoComplete', debouncedSearchTerm);
       handleEvent({ command: 'autoComplete', value: debouncedSearchTerm });
     }
-  }, [debouncedSearchTerm]);
+  }, [debouncedSearchTerm, handleEvent, isAutoComplete]);
   // debounce searh end
   const onChange = (event) => {
     const value = event.target.value;
