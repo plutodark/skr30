@@ -1,9 +1,11 @@
-import { find, get, isEmpty } from 'lodash';
+import { find, get, isEmpty, isNil } from 'lodash';
 import {
   UPDATE_ITEM_VALUE,
   SELECT_ITEM,
   REQUEST_POSTS,
   RECEIVE_POSTS,
+  REQUEST_ASSETS,
+  RECEIVE_ASSETS,
   RECEIVE_ITEM,
   INVALIDATE_SUBREDDIT,
 } from './actionTypes';
@@ -14,9 +16,18 @@ const requestPosts = (subreddit) => dispatch({
   type: REQUEST_POSTS,
   subreddit,
 });
-
+const requestAssets = (subreddit) => dispatch({
+  type: REQUEST_ASSETS,
+  subreddit,
+});
 const receivePosts = ({ subreddit, data }) => dispatch({
   type: RECEIVE_POSTS,
+  subreddit,
+  data,
+  lastUpdated: new Date(),
+});
+const receiveAssets = ({ subreddit, data }) => dispatch({
+  type: RECEIVE_ASSETS,
   subreddit,
   data,
   lastUpdated: new Date(),
@@ -46,7 +57,8 @@ const invalidateSubreddit = (subreddit) => dispatch({
 });
 const shouldFetchPosts = (state, subreddit) => {
   const posts = state[subreddit];
-  if(isEmpty(get(posts, 'lastUpdated', null))) {
+  const lastUpdated = get(posts, 'lastUpdated', null);
+  if(isNil(lastUpdated)) {
     return true;
   }
   if (!posts) {
@@ -70,14 +82,21 @@ const fetchPosts = (subreddit, fetchFunc) => {
   return fetchFunc()
     .then(data => receivePosts({ subreddit, data }));
 };
+const fetchAssets = (subreddit, fetchFunc) => {
+  requestAssets(subreddit);
+  return fetchFunc()
+    .then(data => receiveAssets({ subreddit, data }));
+};
 const fetchItem = (subreddit, fetchFunc) => {
   return fetchFunc()
     .then(data => receiveItem({ subreddit, data }));
 };
 const fetchPostsIfNeeded = (subreddit, fetchFunc) => {
-    return shouldFetchPosts(store.getState().Entities, subreddit) ? fetchPosts(subreddit, fetchFunc) : Promise.resolve();
+  return shouldFetchPosts(store.getState().Entities, subreddit) ? fetchPosts(subreddit, fetchFunc) : Promise.resolve();
 };
-
+const fetchAssetsIfNeeded = (subreddit, fetchFunc) => {
+  return shouldFetchPosts(store.getState().Entities, subreddit) ? fetchAssets(subreddit, fetchFunc) : Promise.resolve();
+};
 const fetchItemIfNeeded = ({ subreddit, id, fetchFunc }) => {
   return shouldFetchItem({ state: store.getState().Entities, subreddit, id }) ? fetchItem(subreddit, fetchFunc) : Promise.resolve();
 };
@@ -87,6 +106,7 @@ export default {
   receivePosts,
   invalidateSubreddit,
   fetchPostsIfNeeded,
+  fetchAssetsIfNeeded,
   fetchItemIfNeeded,
   updateItemValue,
   selectItem,

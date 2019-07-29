@@ -4,9 +4,6 @@ import {
   chain,
   cloneDeep,
   find,
-  // concat,
-  // value,
-  // uniqBy,
 } from 'lodash';
 import {
   INVALIDATE_SUBREDDIT,
@@ -15,6 +12,8 @@ import {
   REQUEST_POSTS,
   UPDATE_ITEM_VALUE,
   SELECT_ITEM,
+  REQUEST_ASSETS,
+  RECEIVE_ASSETS,
 } from './actionTypes';
 import initialState from './initialState';
 
@@ -22,7 +21,8 @@ const posts = (state = initialState, action) => {
   const { type, data, lastUpdated } = action;
   switch (type) {
     case INVALIDATE_SUBREDDIT:
-      return assign({}, state, { didInvalidate: true });
+      return assign({}, state, { didInvalidate: true, items: null });
+    case REQUEST_ASSETS:
     case REQUEST_POSTS:
       return assign({}, state, {
         isFetching: true,
@@ -50,6 +50,15 @@ const posts = (state = initialState, action) => {
         totalDocs: parseInt(totalDocs, 10),
         totalPages: parseInt(totalPages, 10),
       };
+      return assign({}, state, object);
+    }
+    case RECEIVE_ASSETS: {
+      const object = {
+        isFetching: false,
+        didInvalidate: false,
+        lastUpdated,
+      };
+      assign(object, data);
       return assign({}, state, object);
     }
     case RECEIVE_ITEM: {
@@ -88,6 +97,8 @@ const postsBySubreddit = (state = {}, action) => {
     case REQUEST_POSTS:
     case RECEIVE_ITEM:
     case UPDATE_ITEM_VALUE:
+    case REQUEST_ASSETS:
+    case RECEIVE_ASSETS:
       return assign({}, state, { [subreddit]: posts(state[subreddit], action) });
     default:
       return state;

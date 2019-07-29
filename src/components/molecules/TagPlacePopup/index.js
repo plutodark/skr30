@@ -1,6 +1,8 @@
 import React from 'react';
-import { map } from 'lodash';
+import { map, get, find, isNil } from 'lodash';
 import { Modal, DropdownButton, Dropdown } from 'react-bootstrap';
+import withLocale from '../../hoc/withLocale';
+import withPhotoAssets from '../../hoc/withPhotoAssets';
 import './style.scss';
 
 const TagPlacePopup = (props) => {
@@ -11,18 +13,25 @@ const TagPlacePopup = (props) => {
     selectedPlace,
     handleEvent,
     id,
+    locale,
   } = props;
-  const renderItem = (place, key) => (
-    <Dropdown.Item
-      key={key}
-      onClick={() => handleEvent({ command: 'selectPlace', value: place, id })}
-    >
-      {place}
-    </Dropdown.Item>
-  );
+  const selectedPlaceObj = find(places, { id: selectedPlace });
+  const selectedPlaceLabel = isNil(selectedPlaceObj) ? 'Unknown' : get(selectedPlaceObj, [locale], selectedPlaceObj.en);
+  const renderItem = (place, key) => {
+    const label = get(place, [locale], place.en);
+    const placeId = get(place, 'id', 0);
+    return (
+      <Dropdown.Item
+        key={key}
+        onClick={() => handleEvent({ command: 'selectPlace', value: placeId, id })}
+      >
+        {label}
+      </Dropdown.Item>
+    );
+};
   const renderItems = () => map(places, renderItem);
   const renderDropdown = () => (
-    <DropdownButton title={selectedPlace}>
+    <DropdownButton title={selectedPlaceLabel}>
       {renderItems()}
     </DropdownButton>
   );
@@ -42,4 +51,4 @@ const TagPlacePopup = (props) => {
   );
 };
 
-export default TagPlacePopup;
+export default withPhotoAssets(withLocale(TagPlacePopup));

@@ -1,17 +1,21 @@
 import React, { useState } from 'react';
-import { get, isEmpty, map } from 'lodash';
+import { get, isEmpty, map, isNil, chain } from 'lodash';
 
 import IconButton from '../../atoms/IconButton';
 import Tag from '../../atoms/Tag';
 import IconMenu from '../../molecules/IconMenu';
 import TagPlacePopup from '../../molecules/TagPlacePopup';
 import TagBibPopup from '../../molecules/TagBibPopup';
+import withLocale from '../../hoc/withLocale';
+import withPhotoAssets from '../../hoc/withPhotoAssets';
 import './style.scss'
 
 const PhotoDetail = (props) => {
   const {
     photo,
     handleEvent,
+    places,
+    locale,
   } = props;
   const [ isPlacePopupOpen, setIsPlacePopupOpen ] = useState(false);
   const [ isBibPopupOpen, setIsBibPopupOpen ] = useState(false);
@@ -70,13 +74,13 @@ const PhotoDetail = (props) => {
     );
   };
   const renderPlacePopup = () => {
-    const selectedPlace = isEmpty(photo.place) ? 'Unknown' : photo.place;
+    const place = get(photo, 'place', null);
+    const selectedPlace = isNil(place) ? 'Unknown' : place;
 
     return (
       <TagPlacePopup
         isOpen={isPlacePopupOpen}
         onClose={() => setIsPlacePopupOpen(false)}
-        places={['Pak Tam Chung', 'Wong Sek', 'Luk Wu Country Trail']}
         selectedPlace={selectedPlace}
         handleEvent={handleEvent}
         id={id}
@@ -97,9 +101,13 @@ const PhotoDetail = (props) => {
   };
   const renderTags = () => {
     const { place, bib } = photo;
+    const placeLabel = chain(places)
+      .find({ id: place })
+      .get([locale], '')
+      .value();
     const renderPlaceTag = () => (
       <Tag
-        label={place}
+        label={placeLabel}
         icon={'place'}
         isCloseButtonShown={false}
       />
@@ -133,4 +141,4 @@ const PhotoDetail = (props) => {
   ) : <div>{'missing'}</div>;
 };
 
-export default PhotoDetail;
+export default withPhotoAssets(withLocale(PhotoDetail));

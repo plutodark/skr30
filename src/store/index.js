@@ -7,6 +7,7 @@ import {
 import thunk from 'redux-thunk';
 // import { routerReducer } from 'react-router-redux';
 import Entities from './reducers';
+import PhotoPage from '../pages/Photos/reducer';
 
 const appliedMiddleware = applyMiddleware(thunk);
 
@@ -23,6 +24,7 @@ const store = createStore(
   combineReducers({
     // routing: routerReducer,
     Entities,
+    PhotoPage,
   }),
   {},
   composed

@@ -1,0 +1,11 @@
+const ADD_TAG = 'ADD_TAG';
+const REMOVE_TAG = 'REMOVE_TAG';
+const SET_SUGGESTION = 'ADD_SUGGESTION';
+
+
+
+export {
+  ADD_TAG,
+  REMOVE_TAG,
+  SET_SUGGESTION,
+};

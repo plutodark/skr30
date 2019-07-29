@@ -15,6 +15,9 @@
     border-color: blue;
   }
 }
+.input {
+  position: relative;
+}
 
 .input--tag {
   margin-right: 10px;
@@ -38,7 +41,10 @@
 .input--suggestions-container {
   padding: 10px;
   border: grey 1px solid;
-  position: relative;
+  position: absolute;
+  background: white;
+  left:0px;
+  right: 0px;
 }
 .input--suggestions--item {
   display: flex;

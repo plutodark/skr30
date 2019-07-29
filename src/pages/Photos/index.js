@@ -1,8 +1,18 @@
 import React, { useEffect } from 'react';
-import { get } from 'lodash';
+import {
+  get,
+  chain,
+  partition,
+  map,
+
+  isNil,
+} from 'lodash';
 import { connect } from 'react-redux';
+import pageAction from './action';
 import action from '../../store/Photos/action';
+import SearchAction from '../../store/SearchResult/action';
 import withLocale from '../../components/hoc/withLocale';
+import withPhotoAssets from '../../components/hoc/withPhotoAssets';
 import Photos from '../../components/organisms/Photos';
 
 
@@ -12,46 +22,102 @@ const PhotosPage = (props) => {
     fetchPhotos,
     photos,
     history,
+    places,
+    availableBibs,
+    locale,
+    searchPhotos,
+    invalidateSearchPhotos,
+    addTag,
+    removeTag,
+    tags,
+    setSuggestions,
+    suggestions,
   } = props;
   const onPhotoOpen = (index) => {
     const { id } = photos[index];
     const link = `/photoDetail/${id}`;
     history.push(link);
   };
+
+  const onSearchPhotos = () => {
+    const [placesInTag, bibObjs] =  partition(tags, { icon: 'place' });
+    const place = placesInTag.length > 0 ? chain(places)
+      .find(o => o.en === placesInTag[0].label || o.tc === placesInTag[0].label)
+      .get('id', '')
+      .value() : '';
+    const bibs = map(bibObjs, o => o.label);
+    searchPhotos({ place, bibs });
+  };
+
   useEffect(() => {
     fetchPhotos();
-  }, [fetchPhotos]);
+  }, []);
+
+  useEffect(() => {
+    invalidateSearchPhotos();
+    if (tags.length !== 0) {
+      onSearchPhotos();
+    }
+    // searchPhotos();
+    // invalidateSearchPhotos,
+  }, [tags]);
   const handleEvent = ({ command, value }) => {
     console.log('command', command);
     console.log('value', value);
+    switch (command) {
+      case 'autoComplete':
+        return setSuggestions({ value, places, availableBibs, locale });
+      case 'enter':
+        return addTag({value, places, availableBibs, locale });
+      case 'removeTag':
+        return removeTag(value);
+      default:
+        break;
+    }
   };
   return (
     <Photos
       {...props}
       handleEvent={handleEvent}
       onPhotoOpen={onPhotoOpen}
+      suggestions={suggestions}
+      tags={tags}
     />
   );
 };
 
 const mapStateToProps = (state) => {
-  const { PHOTOS } = state.Entities;
-  const photos = get(PHOTOS, 'items', []);
-  const hasNextPage = get(PHOTOS, 'hasNextPage', false);
-  const page = get(PHOTOS, 'page', 0);
+  const result = isNil(get(state, 'Entities.SEARCHRESULT.items', [])) ? get(state, 'Entities.PHOTOS') : get(state, 'Entities.SEARCHRESULT', []);
+  const photos = get(result, 'items', []);
+  const hasNext = get(result, 'hasNext', false);
+  const page = get(result, 'page', 0);
+  const tags = get(state, 'PhotoPage.tags', []);
+  const suggestions = get(state, 'PhotoPage.suggestions', []);
   return {
     photos,
-    hasNextPage,
+    hasNext,
     page,
+    tags,
+    suggestions,
   };
 };
-const mapDispatchToProps = () => {
+const mapDispatchToProps = (dispatch) => {
   const {
     fetchPhotos,
   } = action;
+  const { addTag, removeTag, setSuggestions } = pageAction;
+  const {
+    searchPhotos,
+    invalidateSearchPhotos,
+  } = SearchAction;
   return {
+    addTag,
+    removeTag,
+    setSuggestions,
     fetchPhotos,
+    searchPhotos,
+    invalidateSearchPhotos,
   };
 };
 
-export default withLocale(connect(mapStateToProps, mapDispatchToProps)(PhotosPage));
+export default withPhotoAssets(withLocale(connect(mapStateToProps, mapDispatchToProps)(PhotosPage)));

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import action from '../../store/Photos/action';
 import PhotoDetail from '../../components/organisms/PhotoDetail';
+import withPhotoAssets from '../../components/hoc/withPhotoAssets';
 
 const PhotoDetailPage = (props) => {
   const {
@@ -75,4 +76,4 @@ const mapDispatchToProps = () => {
     fetchOnePhoto,
   };
 };
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PhotoDetailPage));
+export default withPhotoAssets(withRouter(connect(mapStateToProps, mapDispatchToProps)(PhotoDetailPage)));

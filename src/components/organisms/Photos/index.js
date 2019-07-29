@@ -10,9 +10,8 @@ const Photos = (props) => {
     photos,
     dictionary,
     fetchPhotos,
-    hasNextPage,
+    hasNext,
     onPhotoOpen,
-    handleEvent,
     page,
   } = props;
   const renderEmptyPhotos = () => (
@@ -43,16 +42,18 @@ const Photos = (props) => {
   const renderSearch = () => {
     return (
       <Input
-        handleEvent={handleEvent}
+        {...props}
         placeholder={'Enter keyword here'}
+        isAutoComplete
       />
     );
   };
+  const hasPhotos = !(photos === null || get(photos, 'length', 0) === 0);
   return (
     <div>
       {photos && renderSearch()}
-      {photos ? renderPhotos() : renderEmptyPhotos()}
-      {hasNextPage && renderMoreButton()}
+      {hasPhotos ?  renderPhotos() : renderEmptyPhotos()}
+      {hasNext && renderMoreButton()}
     </div>
   );
 };

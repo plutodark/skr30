@@ -25,10 +25,10 @@ const Input = (props) => {
   const debouncedSearchTerm = useDebounce(keyword, 1000);
   useEffect(() => {
     if (debouncedSearchTerm && isAutoComplete) {
-      console.log(debouncedSearchTerm);
+      console.log('autoComplete', debouncedSearchTerm);
       handleEvent({ command: 'autoComplete', value: debouncedSearchTerm });
     }
-  }, [debouncedSearchTerm, handleEvent, isAutoComplete]);
+  }, [debouncedSearchTerm]);
   // debounce searh end
   const onChange = (event) => {
     const value = event.target.value;
@@ -77,9 +77,9 @@ const Input = (props) => {
     }
   };
 
-  const onTagEvent = ({ command }, value) => {
+  const onTagEvent = ({ command }, key) => {
     if (command === 'close') {
-      return handleEvent({ command: 'removeTag', value });
+      return handleEvent({ command: 'removeTag', value: key });
     }
   };
   const renderInputBox = () => (
@@ -102,7 +102,7 @@ const Input = (props) => {
         key={key}
         label={label}
         icon={icon}
-        handleEvent={props => onTagEvent(props, label)}
+        handleEvent={props => onTagEvent(props, key)}
       />
     );
   };
@@ -122,10 +122,15 @@ const Input = (props) => {
       </div>
     );
   };
+  const renderEmptySuggestion = () => (
+    <>
+      {'No such result'}
+    </>
+  );
   const renderSuggestions = () => {
     return (
       <div className={'input--suggestions-container'}>
-        {map(suggestions, renderSuggestion)}
+        {suggestions.length ? map(suggestions, renderSuggestion) : renderEmptySuggestion()}
       </div>
     );
   };
