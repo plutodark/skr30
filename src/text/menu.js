@@ -4,11 +4,11 @@ const menu = {
     tc: '主頁',
     href: '',
   },
-  registration: {
-    en: 'Registration',
-    tc: '線上報名',
-    href: 'registration',
-  },
+  // registration: {
+  //   en: 'Registration',
+  //   tc: '線上報名',
+  //   href: 'registration',
+  // },
   summary: {
     en: 'Race Summary',
     tc: '比賽撮要',
